@@ -1,0 +1,162 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="flot/styles.css" />
+		
+	<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.selection.js"></script>
+	<title>Steinman Hall C11: String 0001 - Real Time Monitoring and Control</title>
+	
+</head>
+<body>
+	<section id="page"> <!-- Defining the #page section with the section tag -->
+
+        <header> <!-- Defining the header section of the page with the appropriate tag -->
+        
+            <hgroup>
+                <h1>CUNY Energy Institute</h1>
+                <h3>Steinman Hall C11: String 0001 - Real Time Monitoring and Control</h3>
+            </hgroup>
+                            
+            <nav class="clear"> <!-- The nav link semantically marks your main site navigation -->
+                <ul>
+                    <li><a href="bms">Last Readings</a></li>
+                    <li><a href="bmslog">Log</a></li>
+                    <li><a href="plotarbin">Arbin Plot</a></li>
+					<li><a href="plotbms">BMS Plot</a></li>
+                </ul>
+            </nav>
+        
+    	</header>
+
+	<div class="line"></div>  <!-- Dividing line -->
+	
+	<section id="articles" style="width:70%;float:left"> <!-- A new section with the articles -->
+     
+            <article id="article1">
+	
+				<h2>BMS - Real Time</h2>
+				
+				<div class="line"></div>
+
+				<div id="plots_board_1" class="plots">
+					<div id="flot_all_board_1" class="plot"></div><div id="flot_Board_1"/>
+				</div>
+				
+				<div id="plots_board_2" class="plots">
+					<div id="flot_all_board_2" class="plot"></div><div id="flot_Board_2"/>
+				</div>
+				
+				<div id="plots_board_3" class="plots">
+					<div id="flot_all_board_3" class="plot"></div><div id="flot_Board_3"/>
+				</div>
+				
+				<div id="plots_board_4" class="plots">
+					<div id="flot_all_board_4" class="plot"></div><div id="flot_Board_4"/>
+				</div>
+				
+				<div id="plots_board_5" class="plots">
+					<div id="flot_all_board_5" class="plot"></div><div id="flot_Board_5"/>
+				</div>
+				
+				<div id="plots_board_6" class="plots">
+					<div id="flot_all_board_6" class="plot"></div><div id="flot_Board_6"/>
+				</div>
+				
+				<div id="plots_board_7" class="plots">
+					<div id="flot_all_board_7" class="plot"></div><div id="flot_Board_7"/>
+				</div>
+				
+				<div id="plots_board_8" class="plots">
+					<div id="flot_all_board_8" class="plot"></div><div id="flot_Board_8"/>
+				</div>
+				
+			</article>
+    
+	
+	</section>
+	
+	<section style="width:27%;float:right">
+		
+		<article>
+			
+			<h2>Filters</h2>
+			<div class="line"></div>
+			<label for="power">Number of hours: </label>
+            <input type="text" value="12" id="points" name="points" size=4></input><br /><br />
+			<div class="line"></div>
+			
+		</article>
+
+	</section>
+    <section style="width:27%;float:right">
+
+		<article>
+			<img src="flot/30kwh.png" style="width:260px">
+
+		</article>
+	</section>
+	</section> <!-- Closing the #page section -->
+
+
+</body>
+
+<script src="/flot/build_dom.js"></script>
+<script src="/flot/functions_bms.js"></script> 
+<script>
+
+db_to_get = "logsBMS"
+
+var startData, endData;
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_1":1,"Time":1}},1,"board_1")},5000)
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_2":1,"Time":1}},1,"board_2")},5010)
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_3":1,"Time":1}},1,"board_3")},5020)
+	
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_4":1,"Time":1}},1,"board_4")},5030)
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_5":1,"Time":1}},1,"board_5")},5040)	
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_6":1,"Time":1}},1,"board_6")},5050)
+		
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_7":1,"Time":1}},1,"board_7")},5060)
+						
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"Board_8":1,"Time":1}},1,"board_8")},5070)
+			
+</script>
+<script src="flot/script.js"></script>
+</html>

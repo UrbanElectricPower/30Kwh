@@ -1,0 +1,105 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="flot/styles.css" />
+		
+	<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.selection.js"></script>
+	<title>Steinman Hall C11: String 0001 - Real Time Monitoring and Control</title>
+	
+</head>
+<body>
+	<section id="page"> <!-- Defining the #page section with the section tag -->
+
+        <header> <!-- Defining the header section of the page with the appropriate tag -->
+        
+            <hgroup>
+                <h1>CUNY Energy Institute</h1>
+                <h3>Steinman Hall C11: String 0001 - Real Time Monitoring and Control</h3>
+            </hgroup>
+                            
+            <nav class="clear"> <!-- The nav link semantically marks your main site navigation -->
+                <ul>
+                    <li><a href="bms">Last Readings</a></li>
+                    <li><a href="bmslog">Log</a></li>
+                    <li><a href="plotarbin">Arbin Plot</a></li>
+					<li><a href="plotbms">BMS Plot</a></li>
+                </ul>
+            </nav>
+        
+    	</header>
+
+	<div class="line"></div>  <!-- Dividing line -->
+	
+	<section id="articles" style="width:70%;float:left"> <!-- A new section with the articles -->
+     
+            <article id="article1">
+	
+				<h2>Arbin - Real Time</h2>
+				
+				<div class="line"></div>
+        
+				<div id="plots" class="plots">
+					<div id="flot_Power" class="plot"></div>
+					<div id="flot_Current" class="plot"></div>
+					<div id="flot_Voltage" class="plot"></div>
+					<div id="flot_Step_Index" class="plot"></div>
+				</div>
+	
+			</article>
+    
+	
+	</section>
+	
+	<section style="width:27%;float:right">
+		
+		<article>
+			
+			<h2>Filters</h2>
+			<div class="line"></div>
+			<label for="power">Number of hours: </label>
+            <input type="text" value="12" id="points" name="points" size=4></input>
+			<div class="line"></div>
+			
+		</article>
+	</section>
+    <section style="width:27%;float:right">
+
+		<article>
+			<img src="flot/30kwh.png" style="width:260px">
+
+		</article>
+	</section>
+	</section> <!-- Closing the #page section -->
+
+
+</body>
+
+<script src="/flot/build_dom.js"></script>
+<script src="/flot/functions_bms.js"></script> 
+<script>
+
+stuffs = $("[id^=flot_]")
+field_json = {'Time':1}
+
+for (var i = 0; i < stuffs.length; i++)
+{
+	if (stuffs[i].id != undefined) 
+	{
+		field_json[stuffs[i].id.replace("flot_","")] = 1
+	}
+}
+
+db_to_get = "logArbin"
+
+var startData, endData;
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+	startData=(new Date().getTime()-limit*60*60*1000)/1000
+	endData=(new Date().getTime())/1000
+	grabData({collection:db_to_get,query:{'Time':{'$gt':startData,'$lt':endData}},fields:field_json},0,"")},5000)
+
+</script>
+<script src="flot/script.js"></script>
+</html>

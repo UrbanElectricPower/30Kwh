@@ -1,0 +1,151 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="flot/styles.css" />
+		
+	<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.selection.js"></script>
+	<title>Steinman Hall C11: String 0001 - Real Time Monitoring and Control</title>
+	
+</head>
+<body>
+	<section id="page"> <!-- Defining the #page section with the section tag -->
+
+        <header> <!-- Defining the header section of the page with the appropriate tag -->
+        
+            <hgroup>
+                <h1>CUNY Energy Institute</h1>
+                <h3>Steinman Hall C11: String 0001 - Real Time Monitoring and Control</h3>
+            </hgroup>
+                            
+            <nav class="clear"> <!-- The nav link semantically marks your main site navigation -->
+                <ul>
+                    <li><a href="bms">Last Readings</a></li>
+                    <li><a href="bmslog">Log</a></li>
+                    <li><a href="plotarbin">Arbin Plot</a></li>
+					<li><a href="plotbms">BMS Plot</a></li>
+                </ul>
+            </nav>
+        
+    	</header>
+
+	<div class="line"></div>  <!-- Dividing line -->
+	
+	<section id="articles" style="width:65%;float:left"> <!-- A new section with the articles -->
+     
+            <article id="article1">
+	
+				<h2>Battery Management System - LOG</h2>
+				Time: <span id="s1_Time"></span>
+				<div class="line"></div>
+				<div id="sens1" class=inline>
+				<div id="sens2" class=inline>
+				<table border=0 width=650><tr><td valign=top width=70%>
+				
+				<table border=0>
+					<tr>
+						<td width=180>Board 1 <span id="s1_Board_1"></td>
+						<td width=180>Board 2 <span id="s1_Board_2"></td>
+						<td width=180>Board 3 <span id="s1_Board_3"></td>
+						<td width=180>Board 4 <span id="s1_Board_4"></td>
+					</tr>
+					<tr>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_1_0_v"></td></tr><tr><td><span id="sd_Board_1_1_v"></td></tr><tr><td><span id="sd_Board_1_2_v"></td></tr><tr><td><span id="sd_Board_1_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_1_0_r"></td></tr><tr><td><span id="sd_Board_1_1_r"></td></tr><tr><td><span id="sd_Board_1_2_r"></td></tr><tr><td><span id="sd_Board_1_3_r"></td></tr></table></td></tr></table></td>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_2_0_v"></td></tr><tr><td><span id="sd_Board_2_1_v"></td></tr><tr><td><span id="sd_Board_2_2_v"></td></tr><tr><td><span id="sd_Board_2_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_2_0_r"></td></tr><tr><td><span id="sd_Board_2_1_r"></td></tr><tr><td><span id="sd_Board_2_2_r"></td></tr><tr><td><span id="sd_Board_2_3_r"></td></tr></table></td></tr></table></td>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_3_0_v"></td></tr><tr><td><span id="sd_Board_3_1_v"></td></tr><tr><td><span id="sd_Board_3_2_v"></td></tr><tr><td><span id="sd_Board_3_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_3_0_r"></td></tr><tr><td><span id="sd_Board_3_1_r"></td></tr><tr><td><span id="sd_Board_3_2_r"></td></tr><tr><td><span id="sd_Board_3_3_r"></td></tr></table></td></tr></table></td>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_4_0_v"></td></tr><tr><td><span id="sd_Board_4_1_v"></td></tr><tr><td><span id="sd_Board_4_2_v"></td></tr><tr><td><span id="sd_Board_4_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_4_0_r"></td></tr><tr><td><span id="sd_Board_4_1_r"></td></tr><tr><td><span id="sd_Board_4_2_r"></td></tr><tr><td><span id="sd_Board_4_3_r"></td></tr></table></td></tr></table></td>
+					</tr>
+					<tr>
+						<td><span id="sd_Board_1_status"></td>
+						<td><span id="sd_Board_2_status"></td>
+						<td><span id="sd_Board_3_status"></td>
+						<td><span id="sd_Board_4_status"></td>
+					</tr>
+				</table>
+				<br>
+				<table>
+					<tr>
+						<td>Board 5 <span id="s1_Board_5"></td>
+						<td>Board 6 <span id="s1_Board_6"></td>
+						<td>Board 7 <span id="s1_Board_7"></td>
+						<td>Board 8 <span id="s1_Board_8"></td>
+					</tr>
+					<tr>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_5_0_v"></td></tr><tr><td><span id="sd_Board_5_1_v"></td></tr><tr><td><span id="sd_Board_5_2_v"></td></tr><tr><td><span id="sd_Board_5_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_5_0_r"></td></tr><tr><td><span id="sd_Board_5_1_r"></td></tr><tr><td><span id="sd_Board_5_2_r"></td></tr><tr><td><span id="sd_Board_5_3_r"></td></tr></table></td></tr></table></td>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_6_0_v"></td></tr><tr><td><span id="sd_Board_6_1_v"></td></tr><tr><td><span id="sd_Board_6_2_v"></td></tr><tr><td><span id="sd_Board_6_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_6_0_r"></td></tr><tr><td><span id="sd_Board_6_1_r"></td></tr><tr><td><span id="sd_Board_6_2_r"></td></tr><tr><td><span id="sd_Board_6_3_r"></td></tr></table></td></tr></table></td>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_7_0_v"></td></tr><tr><td><span id="sd_Board_7_1_v"></td></tr><tr><td><span id="sd_Board_7_2_v"></td></tr><tr><td><span id="sd_Board_7_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_7_0_r"></td></tr><tr><td><span id="sd_Board_7_1_r"></td></tr><tr><td><span id="sd_Board_7_2_r"></td></tr><tr><td><span id="sd_Board_7_3_r"></td></tr></table></td></tr></table></td>
+						<td><table><tr><td>V</td><td>R</td></tr><tr><td><table><tr><td><span id="sd_Board_8_0_v"></td></tr><tr><td><span id="sd_Board_8_1_v"></td></tr><tr><td><span id="sd_Board_8_2_v"></td></tr><tr><td><span id="sd_Board_8_3_v"></td></tr></table></td><td><table><tr><td><span id="sd_Board_8_0_r"></td></tr><tr><td><span id="sd_Board_8_1_r"></td></tr><tr><td><span id="sd_Board_8_2_r"></td></tr><tr><td><span id="sd_Board_8_3_r"></td></tr></table></td></tr></table></td>
+					</tr>
+					<tr>
+						<td><span id="sd_Board_5_status"></td>
+						<td><span id="sd_Board_6_status"></td>
+						<td><span id="sd_Board_7_status"></td>
+						<td><span id="sd_Board_8_status"></td>
+					</tr>
+				</table>
+				
+				</td><td valign=top width=30%>
+					
+				<table>
+					<tr><td>Current</td><td><span id="s2_Current"></td></tr>
+					<tr><td>Step Index</td><td><span id="s2_Step_Index"></td></tr>
+					<tr><td>ADJ Current</td><td><span id="s2_adj_Current"></td></tr>
+				</table>
+				
+				</td></tr></table>
+
+			</article>
+    
+	
+	</section>
+	
+	<section style="width:32%;float:right">
+
+		<article>
+			<img src="flot/30kwh.png" style="width:314px">
+
+		</article>
+	</section>
+    
+	</section> <!-- Closing the #page section -->
+
+</body>
+
+<script src="/flot/build_dom.js"></script>
+<script src="/flot/functions_bms.js"></script> 
+
+<script>
+
+sensors1 = $("[id^=s1_]")
+sensors_json1 = {}
+
+sensors2 = $("[id^=s2_]")
+sensors_json2 = {}
+
+for (var i = 0; i < sensors1.length; i++)
+{
+	if (sensors1[i].id != undefined) 
+	{
+		sensors_json1[sensors1[i].id.replace("s1_","")] = 1
+	}
+}
+
+
+for (var i = 0; i < sensors2.length; i++)
+{
+	if (sensors2[i].id != undefined) 
+	{
+		sensors_json2[sensors2[i].id.replace("s2_","")] = 1
+	}
+}
+
+
+db_to_get_sensors1 = "stepBMS"
+db_to_get_sensors2 = "stepArbin"
+
+setInterval(function(){grabSensors1({collection:db_to_get_sensors1,query:{},fields:sensors_json1})},2511)
+setInterval(function(){grabSensors2({collection:db_to_get_sensors2,query:{},fields:sensors_json2})},2711)
+
+</script>
+<script src="flot/script.js"></script>
+</html>
