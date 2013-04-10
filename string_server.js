@@ -55,7 +55,7 @@ app.post('/getdata',getStuff,function(req, res){
 });
 
 //Start listener on this port
-app.listen(80);
+app.listen(8000);
 console.log('Express server started');
 
 
