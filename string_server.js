@@ -9,8 +9,8 @@ var app = express();
 app.use(express.bodyParser());
 //app.use(app.router);
 
-var bname="MQ"
-var mname="localhost:27017/"
+var bname="200kwh"
+var mname="nightshops.info:27017/"
 
 app.use("/flot", express.static(__dirname + '/flot'));
 
