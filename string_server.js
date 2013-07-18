@@ -14,28 +14,23 @@ var mname="localhost:27017/"
 
 app.use("/flot", express.static(__dirname + '/flot'));
 
-app.get('/bms', function(req, res){	
-	indexer = fs.readFileSync('inverter.html').toString()
+app.get('/', function(req, res){
+	indexer = fs.readFileSync('summary.html').toString()
+	res.send(indexer);
+});
+
+app.get('/summary', function(req, res){
+	indexer = fs.readFileSync('summary.html').toString()
     res.send(indexer);
 });
 
-app.get('/bmslog', function(req, res){	
-	indexer = fs.readFileSync('bmslog.html').toString()
+app.get('/plotinverter', function(req, res){
+	indexer = fs.readFileSync('plotinverter.html').toString()
     res.send(indexer);
 });
 
-app.get('/plotarbin', function(req, res){	
-	indexer = fs.readFileSync('bmsplot.html').toString()
-    res.send(indexer);
-});
-
-app.get('/plotbms', function(req, res){	
-	indexer = fs.readFileSync('bmsplot_bms.html').toString()
-    res.send(indexer);
-});
-
-app.get('/', function(req, res){	
-	indexer = fs.readFileSync('inverter.html').toString()
+app.get('/plotbms', function(req, res){
+	indexer = fs.readFileSync('plotbms.html').toString()
     res.send(indexer);
 });
 
@@ -98,7 +93,7 @@ function getStuff(req,res)
 	var collection = foo.collection
 	var q = foo.query
 	var l = undefined
-	var s = {}	
+	var s = {}
 	var f = {}
 	if (foo.limit != undefined) l = foo.limit
 	if (foo.sort != undefined) s = foo.sort
@@ -114,7 +109,7 @@ function getStuff(req,res)
 		//console.log("...Data=" + data)
 	})
 	
-	console.log("End Data")
+	//console.log("End Data")
 }
 
 function DBConnect() {//MongoDB stuff

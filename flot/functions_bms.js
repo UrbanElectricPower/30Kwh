@@ -1,5 +1,5 @@
 
-function grabData(dict,mode,board)
+function grabData(dict,mode)
 {
 	var dict = JSON.stringify(dict)
 	$.ajax({
@@ -9,17 +9,18 @@ function grabData(dict,mode,board)
 	  	url: '/getdata',
 		data: {'data':dict},
 	  	success: function(stuff){
-			console.log(stuff)			
-			if ($("#plots_" + board).length > 0 || $("#plots" + board).length > 0 ) {
+			//console.log(stuff)
+			if ($("#plots_bms").length > 0 ) {
+
 				if(mode==1) {
-					plot_all_one(stuff['data'],board)
+					plot_all_one(stuff['data'])
 				} else {
 					plot_all(stuff['data'])
 				}
 			}
 			else {
-			console.log("what the hell do I do with this=" + board)
-			console.log(stuff)
+			console.log("what the hell do I do with this")
+			//console.log(stuff)
 			}
 		}
 	});
@@ -66,15 +67,15 @@ function plot_all(data)
 	
 }
 
-function plot_all_one(data,board)
+function plot_all_one(data)
 {
 	var foo = data;
-	var stuff_to_omit = ['Time','id','label']
+	var stuff_to_omit = ['Time','_id']
 	
 	var options = {
     series: {
       lines: { show: true, fill: false, lineWidth:2 },
-      points: { show: true, fill: false, radius:3 },
+      points: { show: true, fill: false, radius:3 }
     },
   	xaxis: {
     	mode: "time",
@@ -83,7 +84,7 @@ function plot_all_one(data,board)
   	},
 	yaxis: {
     	min:1.0,
-		max:2.0,
+		max:2.0
   	},
   	legend: {
     
@@ -91,22 +92,39 @@ function plot_all_one(data,board)
     }
   	};
 	
-	flotfoo = []   
-	for (name in foo[0])
+	flotfoo = []
+	//console.log("before for loop")
+	for (name in foo[0]["batteryTable"])
 	{
+		//console.log("name=" + name)
 		if (stuff_to_omit.indexOf(name) == -1)
 		{
-			console.log("name=" + name + "board="+board)
-			if ($("#flot_"+name).length >0)
+
+			if ($("#flot_all_"+name).length >0)
 			{
-				flotfoo.push({'data':flotformatBMS(foo,'Time',name,0),'label':name + " Cell 0"});
-				flotfoo.push({'data':flotformatBMS(foo,'Time',name,1),'label':name + " Cell 1"});
-				flotfoo.push({'data':flotformatBMS(foo,'Time',name,2),'label':name + " Cell 2"});
-				flotfoo.push({'data':flotformatBMS(foo,'Time',name,3),'label':name + " Cell 3"});
-			}	
+
+					flotfoo = [];
+
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,0),'label':name + " Cell 0"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,1),'label':name + " Cell 1"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,2),'label':name + " Cell 2"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,3),'label':name + " Cell 3"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,4),'label':name + " Cell 4"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,5),'label':name + " Cell 5"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,6),'label':name + " Cell 6"});
+					flotfoo.push({'data':flotformatBMS(foo,'Time',name,7),'label':name + " Cell 7"});
+
+					//console.log("board=" + name);
+					$.plot($("#flot_all_" + name), flotfoo, options);
+
+			}
+
 		}
+
+
 	}
-	$.plot($("#flot_all_" + board), flotfoo, options);
+	//console.log(flotfoo)
+
 }
 
 function grabSensors1(dict,mode)
@@ -235,9 +253,9 @@ function flotformatPower(source,xlab) {
 	return dest;
 }
 
-function flotformatBMS(source,xlab,ylab,cell) {
+function flotformatBMS(source,xlab,name,cell) {
 	
-	console.log("xlab=" + xlab + " ylab=" + ylab)
+	//console.log("xlab=" + xlab + " ylab=" + ylab)
 		
 	var start = source[0][xlab]
 	var end = source[source.length - 1][xlab]
@@ -247,18 +265,23 @@ function flotformatBMS(source,xlab,ylab,cell) {
     	dest = [],
     	row;
 
+
+	//console.log("board in flotformatBMS="+name);
+
 	for(i = 0, l = source.length; i < l; i++) 
 	{ 
-    	row = source[i];
+    	row = source[i]["batteryTable"][name];
+		//console.log("cell="+cell);
+		//console.log(row);
 		if (i > 0)
 		{
-			if (Math.abs(source[i][xlab] - source[i-1][xlab]) > avdiff*10) 
+			if (Math.abs(source[i]["batteryTable"][xlab] - source[i-1]["batteryTable"][xlab]) > avdiff*10)
 			{
 				//dest.push("null")
 			}
 		}
-		console.log("T=" + (row[xlab]-4*60*60)*1000 +" v(" + cell + ")=" + row[ylab]["Cells"][cell])
-		dest.push([(row[xlab]-4*60*60)*1000, row[ylab]["Cells"][cell]/1000]);
+		//console.log("T=" + (row[xlab]) +" v(" + cell + ")=" + row[ylab][cell])
+		dest.push([row[xlab], row["batteryValues"][cell]/1000]);
 	}
 	return dest;
 }
@@ -279,7 +302,7 @@ function flotformat(source,xlab,ylab) {
     	row = source[i];
 		if (i > 0)
 		{
-			if (Math.abs(source[i][xlab] - source[i-1][xlab]) > avdiff*10) 
+			if (Math.abs(source[i][xlab] - source[i-1][xlab]) > avdiff*10)
 			{
 				//dest.push("null")
 			}

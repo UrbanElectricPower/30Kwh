@@ -1,0 +1,130 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="flot/styles.css" />
+		
+	<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.selection.js"></script>
+	<title>Steinman Hall C12: String 0001 - Real Time Monitoring</title>
+	
+</head>
+<body>
+	<section id="page"> <!-- Defining the #page section with the section tag -->
+
+        <header> <!-- Defining the header section of the page with the appropriate tag -->
+        
+            <hgroup>
+				<h1>UEP/CUNY Energy Institute</h1>
+				<h3>Steinman Hall C12: String 0001 - CUNY Energy Institute/NYSERDA</h3>
+            </hgroup>
+
+			<nav class="clear">
+				<ul>
+					<li><a href="summary">Summary View</a></li>
+					<li><a href="plotinverter">Inverter</a></li>
+					<li><a href="plotbms">BMS Boxes</a></li>
+				</ul>
+			</nav>
+        
+    	</header>
+
+	<div class="line"></div>  <!-- Dividing line -->
+	
+	<section id="articles" style="width:70%;float:left"> <!-- A new section with the articles -->
+     
+            <article id="article1">
+	
+				<h2>BMS - Real Time</h2>
+				
+				<div class="line"></div>
+
+
+				<div id="plots_bms" class="plots">
+					<div id="flot_all_0001" class="plot"></div>
+					<div id="flot_all_0002" class="plot"></div>
+					<div id="flot_all_0003" class="plot"></div>
+					<div id="flot_all_0004" class="plot"></div>
+					<div id="flot_all_0005" class="plot"></div>
+					<div id="flot_all_0006" class="plot"></div>
+					<div id="flot_all_0007" class="plot"></div>
+					<div id="flot_all_0008" class="plot"></div>
+					<div id="flot_all_0009" class="plot"></div>
+					<div id="flot_all_000a" class="plot"></div>
+					<div id="flot_all_000b" class="plot"></div>
+					<div id="flot_all_000c" class="plot"></div>
+					<div id="flot_all_000d" class="plot"></div>
+					<div id="flot_all_000e" class="plot"></div>
+					<div id="flot_all_000f" class="plot"></div>
+					<div id="flot_all_0010" class="plot"></div>
+					<div id="flot_all_0011" class="plot"></div>
+					<div id="flot_all_0012" class="plot"></div>
+					<div id="flot_all_0013" class="plot"></div>
+					<div id="flot_all_0014" class="plot"></div>
+					<div id="flot_all_0015" class="plot"></div>
+					<div id="flot_all_0016" class="plot"></div>
+					<div id="flot_all_0017" class="plot"></div>
+					<div id="flot_all_0018" class="plot"></div>
+					<div id="flot_all_0019" class="plot"></div>
+					<div id="flot_all_001a" class="plot"></div>
+					<div id="flot_all_001b" class="plot"></div>
+					<div id="flot_all_001c" class="plot"></div>
+					<div id="flot_all_001d" class="plot"></div>
+					<div id="flot_all_001e" class="plot"></div>
+
+
+				</div>
+
+
+
+
+			</article>
+    
+	
+	</section>
+	
+	<section style="width:27%;float:right">
+		
+		<article>
+			
+			<h2>Filters</h2>
+			<div class="line"></div>
+			<label for="power">Number of hours: </label>
+            <input type="text" value="1" id="points" name="points" size=4></input><br /><br />
+			<div class="line"></div>
+			
+		</article>
+
+	</section>
+    <section style="width:27%;float:right">
+
+		<article>
+			<img src="flot/30kwh.png" style="width:260px">
+
+		</article>
+	</section>
+	</section> <!-- Closing the #page section -->
+
+
+</body>
+
+<script src="/flot/build_dom.js"></script>
+<script src="/flot/functions_bms.js"></script> 
+<script>
+
+db_to_get = "tableHistory"
+
+var startData, endData;
+
+setInterval(function(){
+	limit=parseInt($("#points").val())
+
+	startData=(new Date().getTime()-limit*60*60*1000)
+	endData=(new Date().getTime())
+
+	//startData=1374081989999;
+	//endData=1374081999999;
+	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"batteryTable":1,"Time":1}},1)},5000)
+
+</script>
+<script src="flot/script.js"></script>
+</html>
