@@ -89,7 +89,7 @@
 			<h2>Filters</h2>
 			<div class="line"></div>
 			<label for="power">Number of hours: </label>
-            <input type="text" value="1" id="points" name="points" size=4></input><br /><br />
+            <input type="text" value="0.1" id="points" name="points" size=4></input><br /><br />
 			<div class="line"></div>
 			
 		</article>
@@ -111,19 +111,19 @@
 <script src="/flot/functions_bms.js"></script> 
 <script>
 
-db_to_get = "tableHistory"
+db_to_get = "tablehistories"
 
 var startData, endData;
 
 setInterval(function(){
-	limit=parseInt($("#points").val())
+	limit=parseFloat($("#points").val())
 
 	startData=(new Date().getTime()-limit*60*60*1000)
 	endData=(new Date().getTime())
 
 	//startData=1374081989999;
 	//endData=1374081999999;
-	grabData({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"batteryTable":1,"Time":1}},1)},5000)
+	grabDataBMS({collection:db_to_get,sort:{'Time':1},query:{'Time':{'$gt':startData,'$lt':endData}},fields:{"batteryTable":1,"Time":1}},1)},5000)
 
 </script>
 <script src="flot/script.js"></script>

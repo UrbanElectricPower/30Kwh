@@ -10,6 +10,34 @@ function grabData(dict,mode)
 		data: {'data':dict},
 	  	success: function(stuff){
 			//console.log(stuff)
+			if ($("#plots").length > 0 ) {
+
+				if(mode==1) {
+					plot_all_one(stuff['data'])
+				} else {
+					plot_all(stuff['data'])
+				}
+			}
+			else {
+			console.log("what the hell do I do with this")
+			//console.log(stuff)
+			}
+		}
+	});
+	
+}
+
+function grabDataBMS(dict,mode)
+{
+	var dict = JSON.stringify(dict)
+	$.ajax({
+		type: 'POST',
+	  	dataType: "json",
+	  	async: true,
+	  	url: '/getdata',
+		data: {'data':dict},
+	  	success: function(stuff){
+			//console.log(stuff)
 			if ($("#plots_bms").length > 0 ) {
 
 				if(mode==1) {
