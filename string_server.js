@@ -103,7 +103,7 @@ function getStuff(req,res)
 	var db=DBConnect()
 	db.collection(collection).find(q,f).limit(l).sort(s).toArray(function(err,data)
 	{
-		if(err) throw err;
+		if(err) console.log( err);
 		res.send({collect:collection,data:data})	
 		DBClose(db)
 		//console.log("...Data=" + data)
